@@ -150,7 +150,7 @@
         }
         private void ShowMovie(Movie m)
         {
-            Console.WriteLine($"{m.Title} {m.GetLength()} {m.Genre} {m.ReleaseDate} {m.WWW}");
+            Console.WriteLine($"{m.Title} {m.GetLength()} {m.Genre} {m.GetReleaseDate()} {m.WWW}");
         }
 
         private void ShowMovieList()
