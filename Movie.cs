@@ -1,6 +1,6 @@
 ﻿namespace OOPSpotiflixV2
 {
-    internal class Movie : Media
+    internal sealed class Movie : Media
     {
         public string GetLength()
         {

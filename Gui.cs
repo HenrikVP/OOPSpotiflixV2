@@ -3,6 +3,7 @@
     internal class Gui
     {
         private Data data = new Data();
+        //private Media media = new Media();
         private string path = @"c:\SpotiflixData.json";
         public Gui()
         {
@@ -28,6 +29,7 @@
                     break;
                 case ConsoleKey.NumPad3:
                 case ConsoleKey.D3:
+                    MusicMenu();
                     break;
                 case ConsoleKey.NumPad4:
                 case ConsoleKey.D4:
@@ -276,6 +278,11 @@
         private void ShowSeries(Series s)
         {
             Console.WriteLine($"{s.Title}  {s.Genre} {s.GetReleaseDate()} {s.WWW}");
+            foreach (Episode e in s.Episodes)
+            {
+                //TODO Show episode
+                Console.WriteLine($"{e.Title}");
+            }
         }
 
         private void ShowSeriesList()
@@ -289,9 +296,95 @@
         #region Music
         private void MusicMenu()
         {
-            Console.WriteLine("1 for list music\n2 for search music\n3 for add music");
+            Console.WriteLine("\nMUSIC MENU\n1 for list music\n2 for search music\n3 for add music");
+            switch (Console.ReadKey().Key)
+            {
+
+                case ConsoleKey.NumPad1:
+                case ConsoleKey.D1:
+                    ShowMusicList();
+                    break;
+                case ConsoleKey.NumPad2:
+                case ConsoleKey.D2:
+                    break;
+                case ConsoleKey.NumPad3:
+                case ConsoleKey.D3:
+                    AddMusic();
+                    break;
+ 
+
+                default:
+                    break;
+            }
+
+        }
+        private void AddMusic()
+        {
+            Album album = new Album();
+            album.Title = GetString("Album Title: ");
+            album.Artist = GetString("Artist: ");
+            album.Genre = GetString("Genre: ");
+            album.ReleaseDate = GetReleaseDate();
+            album.WWW = GetString("WWW: ");
+
+            ShowAlbum(album);
+            Console.WriteLine("Add album to list?");
+            if (Console.ReadKey(true).Key == ConsoleKey.Y)
+                data.MusicList.Add(album);
+
+            Console.WriteLine("Add new song to album?");
+            while (Console.ReadKey(true).Key == ConsoleKey.Y)
+            {
+                AddSong(album);
+                Console.WriteLine("Add another song to album? (y/n)");
+            };               
         }
 
+        private void AddSong(Album album)
+        {
+            Song song = new Song();
+            song.Title = GetString("Song Title: ");
+            song.Artist = GetInputOrParent(album.Artist, "Artist: ");
+            song.Genre = GetInputOrParent(album.Genre, "Genre: ");
+            song.ReleaseDate = GetReleaseDate();
+            song.Length = GetLength();
+            Console.WriteLine("Add this song to album? (y/n)");
+            if (Console.ReadKey(true).Key == ConsoleKey.Y)
+                album.Songs.Add(song);
+        }
+        private string GetInputOrParent(string parent, string type)
+        {
+            Console.Write(type);
+            string input = Console.ReadLine();
+            if (input != "") parent = input;
+            return parent;
+        }
+
+        private void ShowMusicList()
+        {
+            foreach (Album album in data.MusicList)
+            {
+                ShowAlbum(album, true);
+            }
+        }
+
+        private void ShowAlbum(Album album, bool showSongs = false)
+        {
+            //TODO Show album details
+            Console.WriteLine($"Album title: {album.Title}");
+            if (showSongs)
+            {
+                foreach (Song song in album.Songs)
+                {
+                    ShowSong(song);
+                }
+            }
+        }
+        private void ShowSong(Song song)
+        {
+            //TODO Show song details
+            Console.WriteLine($"song.Title");
+        }
 
         #endregion
     }
