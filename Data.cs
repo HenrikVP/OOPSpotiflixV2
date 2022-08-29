@@ -3,7 +3,7 @@
     internal class Data
     {
         public List<Movie> MovieList { get; set; } = new();
-        //List<Series> serieslist;
-        //List<Music> musiclist;
+        public List<Series> SerieList { get; set; } = new();
+        public List<Album> Albums { get; set; } = new();
     }
 }

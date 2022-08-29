@@ -1,20 +1,16 @@
 ﻿namespace OOPSpotiflixV2
 {
-    internal class Series
+    internal class Series : Media
     {
-        public string? Title { get; set; }
-        public string? Genre { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public string? WWW { get; set; }
         public List<Episode> Episodes { get; set; } = new();
     }
-    internal class Episode
+    internal class Episode : Media
     {
-        public string? Title { get; set; }
-        public DateTime ReleaseDate { get; set; }
         public int Season { get; set; }
         public int EpisodeNum { get; set; }
-        public DateTime Length { get; set; }
-
+        public string GetLength()
+        {
+            return Length.ToString("mm");
+        }
     }
 }
