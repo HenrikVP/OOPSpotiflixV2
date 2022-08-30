@@ -182,12 +182,13 @@
         private void SearchMovie()
         {
             Console.Write("Search: ");
-            string? search = Console.ReadLine();
+            string? search = Console.ReadLine().ToLower();
             foreach (Movie movie in data.MovieList)
             {
                 if (search != null)
                 {
-                    if (movie.Title.Contains(search) || movie.Genre.Contains(search))
+                    //TODO ToLower or ToUpper to match any case
+                    if (movie.Title.ToLower().Contains(search) || movie.Genre.ToLower().Contains(search))
                         ShowMovie(movie);
                 }
             }
@@ -383,7 +384,8 @@
         private void ShowSong(Song song)
         {
             //TODO Show song details
-            Console.WriteLine($"song.Title");
+            Console.Write($"\tSong Title: {song.Title}\tLenght: {GetLength()}\t");
+            //if (song.Artist != al)
         }
 
         #endregion
